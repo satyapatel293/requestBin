@@ -1,13 +1,12 @@
-import React, { useState } from 'react'
+// import React, { useState } from 'react';
+import Home from './components/Home';
+import BasketPage from './components/BasketPage';
 import { Routes, Route, useMatch } from 'react-router-dom';
 // Link,
-import './App.css'
 
-// useMatch to grab id from path, when it exists
 // useNavigate redirects (if redirected after basket creation)
 
 function App() {
-
   const match = useMatch('/web/:id');
   const id = match && match.params.id;
     // if we have an id match in param
@@ -17,8 +16,10 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path='/web/:id' element={<BasketPage basketId={id} />} />
+        {/* do we need a path for "/" to redirect to home page "/web/" */}
+        <Route path="/web/" element={<Home />} />
+        <Route path='/web/:id' element={<BasketPage id={id} />} />
+
       </Routes>
     </>
   );
