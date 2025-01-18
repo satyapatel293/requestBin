@@ -14,6 +14,7 @@ function getBasketRequests(id: string) {
 function getAllBaskets() {
   return axios.get<String[]>(baseUrl)
     .then(response => response.data);
+    // this will be given as array of string names
 }
 
 // delete a basket (DELETE)
@@ -26,6 +27,7 @@ function createBasket() {
   return axios.post(baseUrl)
     .then(response => response.data);
     // ^assuming we are given the id from the backend
+    // if we add functionality for custom path, will need to throw error
 }
 
 // clear all requests for a baskets (UPDATE by clearing)
