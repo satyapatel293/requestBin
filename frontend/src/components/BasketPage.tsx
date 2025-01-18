@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Request } from '../types';
+import services from '../services/basketService';
 
 interface BasketPageProps {
   id: string | null | undefined;
@@ -34,7 +35,7 @@ function BasketPage({ id }: BasketPageProps) {
       // useEffect
 
   useEffect(() => {
-    axios.getBasketRequests(id)
+    services.getBasketRequests(id)
          .then(data => setRequests(data));
   }, []);
 
