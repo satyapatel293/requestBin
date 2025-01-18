@@ -22,9 +22,10 @@ function deleteBasket(id: string) {
 }
 
 // create a basket (CREATE)
-function createBasket(id: string) {
-  return axios.post(baseUrl, { id })
+function createBasket() {
+  return axios.post(baseUrl)
     .then(response => response.data);
+    // ^assuming we are given the id from the backend
 }
 
 // clear all requests for a baskets (UPDATE by clearing)

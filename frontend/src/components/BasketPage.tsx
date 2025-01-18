@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Request } from '../types';
 import services from '../services/basketService';
+import Header from './Header';
 
 interface BasketPageProps {
   id: string | null | undefined;
@@ -36,13 +37,15 @@ function BasketPage({ id }: BasketPageProps) {
 
   useEffect(() => {
     services.getBasketRequests(id)
-         .then(data => setRequests(data));
+         .then(data => setRequests(data))
+         .catch(error => console.error(error.message));
   }, []);
 
   return (
     <div>
-      {requests.map((request: Request) => {
-        return <p>{request.path}</p>
+      <Header pageTitle={`Basket: ${id}`} />
+      {requests.map((request: Request, idx: number) => {
+        return <p key={request.path + String(idx)}>{request.path}</p>
       })}
       This is BasketPage {id}
     </div>

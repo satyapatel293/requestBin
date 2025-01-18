@@ -9,3 +9,7 @@ export interface Request {
   headers: Header;
   body: string;
 }
+
+export interface HeaderProps {
+  pageTitle: string;
+}
