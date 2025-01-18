@@ -16,13 +16,26 @@ function getAllBaskets() {
 }
 
 // delete a basket (DELETE)
+function deleteBasket(id: string) {
+  return axios.delete(baseUrl + "/" + String(id));
+}
 
 // create a basket (CREATE)
+function createBasket(id: string) {
+  return axios.post(baseUrl, { id })
+    .then(response => response.data);
+}
 
-// clear all requests for a basketb (UPDATE by clearing)
+// clear all requests for a baskets (UPDATE by clearing)
+function deleteAllRequests(id: string) {
+  return axios.delete(baseUrl + "/" + String(id) + "/requests");
+}
 
 
 export default {
   getBasketRequests,
-
+  getAllBaskets,
+  deleteBasket,
+  createBasket,
+  deleteAllRequests,
 }

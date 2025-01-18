@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Request } from '../types';
 
 interface BasketPageProps {
   id: string | null | undefined;
