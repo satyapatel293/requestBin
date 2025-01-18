@@ -44,6 +44,7 @@ function BasketPage({ id }: BasketPageProps) {
   return (
     <div>
       <Header pageTitle={`Basket: ${id}`} />
+      <p>Requests are collected at: THIS URL</p>
       {requests.map((request: Request, idx: number) => {
         return <p key={request.path + String(idx)}>{request.path}</p>
       })}
