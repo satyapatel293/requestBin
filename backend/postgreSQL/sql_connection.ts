@@ -4,6 +4,7 @@ const client = new Client ({
     host: 'localhost',
     port: 5432,
     user: 'basketagent',
+    password: 'whatever',
     database: 'requestbasketdb'
 });
 
