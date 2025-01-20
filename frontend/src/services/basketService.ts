@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { Request } from '../types';
+import { Request, Basket } from '../types';
 
 
-const baseUrl = import.meta.env.BASE_URL;
+const baseUrl = 'http://localhost:3000/api/baskets'; //import.meta.env.BASE_URL;
 
 // get all requests for a basket (READ)
 function getBasketRequests(id: string) {
@@ -12,7 +12,7 @@ function getBasketRequests(id: string) {
 
 // get all basket names (READ)
 function getAllBaskets() {
-  return axios.get<String[]>(baseUrl)
+  return axios.get<Basket[]>(baseUrl)
     .then(response => response.data);
     // this will be given as array of string names
 }

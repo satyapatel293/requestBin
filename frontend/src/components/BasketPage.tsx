@@ -7,8 +7,6 @@ interface BasketPageProps {
   id: string | null | undefined;
 }
 
-
-
 const testRequests: Request[] = [
   { time: Date.now(),
     path: '/asdflsdf/',
@@ -36,9 +34,14 @@ function BasketPage({ id }: BasketPageProps) {
       // useEffect
 
   useEffect(() => {
-    services.getBasketRequests(id)
-         .then(data => setRequests(data))
-         .catch(error => console.error(error.message));
+    if (typeof id === 'string') {
+      services.getBasketRequests(id)
+           .then(data => {
+            console.log(data);
+            setRequests(data)
+    })
+           .catch(error => console.error(error.message));
+    }
   }, []);
 
   return (
@@ -54,3 +57,17 @@ function BasketPage({ id }: BasketPageProps) {
 }
 
 export default BasketPage;
+
+/* RETURN DATA
+Array(3) [ {…}, {…}, {…} ]
+​
+0: Object { id: "1234567890", basket_id: "BASKET001", path: "BASKET001/Bearer/token1", … }
+​
+1: Object { id: "1234567891", basket_id: "BASKET001", path: "BASKET001/Bearer/token2", … }
+​
+2: Object { id: "1234567895", basket_id: "BASKET001", path: "BASKET001/Bearer/token6", … }
+​
+length: 3
+​
+<prototype>: Array []
+*/

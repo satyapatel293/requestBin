@@ -13,3 +13,7 @@ export interface Request {
 export interface HeaderProps {
   pageTitle: string;
 }
+
+export interface Basket {
+  basket_name: string;
+}
