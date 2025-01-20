@@ -77,6 +77,27 @@ app.delete('/api/baskets/:id', async (_req, res) => {
 });
 
 
+app.all('/basket/:uniqueURL', async (req, res) => {
+  try {
+    const url = req.params.uniqueURL;
+    const results = await getAllBaskets();
+    if (results.map(obj => obj.basket_name).includes(url)) {
+      res.json(req.method);
+
+      //create a UUID for the request 
+      //parse the request and insert parts into mongo and parts into sql 
+      
+
+    } else {  
+      console.log('BAD request to get url');
+      res.status(404).send('No basket with that name was found!');
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('Internal server error getting url');
+  }
+});
+
 
 /*
 app.all('/bin/:someUniquePath') //catch all 

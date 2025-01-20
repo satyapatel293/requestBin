@@ -2,6 +2,7 @@ import { client } from './sql_connection';
 
 interface Baskets {
     basket_name: string,
+    // created_at: string,
 }
 
 interface Headers {
@@ -18,8 +19,8 @@ interface Requests {
 
 export const getAllBaskets = async (): Promise<Baskets[]> => {
     try {
-        const result = await client.query('SELECT * FROM baskets');
-        return result.rows as Baskets[];
+        const result = await client.query('SELECT basket_name FROM baskets');
+        return result.rows as Baskets[]; 
     } catch (err) {
       if (err instanceof Error) {
         throw new Error(`There was an error fetching the baskets from the database ${err}`);

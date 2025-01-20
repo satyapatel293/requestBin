@@ -10,6 +10,7 @@ DROP TABLE IF EXISTS baskets;
 -- Create the baskets table with VARCHAR and without trailing comma
 CREATE TABLE IF NOT EXISTS baskets (
   basket_name VARCHAR(10) PRIMARY KEY
+  -- created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Create the requests table with corrected foreign key reference and data types
