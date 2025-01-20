@@ -3,7 +3,7 @@ GET http://localhost:3000/api/baskets
 ###
 
 
-GET http://localhost:3000/api/baskets/BASKET005
+GET http://localhost:3000/api/baskets/1d319605-f
 
 ###
 
@@ -13,5 +13,10 @@ DELETE http://localhost:3000/api/baskets/BASKET001
 
 POST http://localhost:3000/api/baskets
 
-###
-POST http://localhost:3000/basket/BASKET009
+### add item to request basket
+POST http://localhost:3000/basket/BASKET001
+
+
+
+### add item to request basket
+PATCH http://localhost:3000/basket/1d319605-f

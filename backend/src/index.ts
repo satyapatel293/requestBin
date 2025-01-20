@@ -1,9 +1,11 @@
 import express from 'express';
 import { connectDB } from '../postgreSQL/sql_connection';
-import { getAllBaskets, getSingleBasketRequests, deleteBasket, addNewBasket} from '../postgreSQL/queries';
+import sqlService from '../postgreSQL/queries';
+import { NewRequest } from '../types';
+import { v4 as uuidv4 } from 'uuid';
 import cors from 'cors';
+
 const app = express();
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 app.use(cors());
 
 app.use(express.json());
@@ -22,17 +24,14 @@ const PORT = 3000;
 
 
 //THIS WILL CHANGE JUST A STAND IN FOR GENERATING UNIQUE URLS
-const randomURLGenerator = () => {
-  let count = 1234567890;
-  return () => count++;
+const generateId = () => {
+  const uuid = uuidv4();
+  return uuid.slice(0,10);
 };
-const newCounter = randomURLGenerator();
-/////
-
 
 app.get('/api/baskets', async (_req, res) => {
   try {
-    const results = await getAllBaskets(); 
+    const results = await sqlService.getAllBaskets(); 
     res.json(results);  
   } catch (err) {
     console.error(err); 
@@ -42,7 +41,7 @@ app.get('/api/baskets', async (_req, res) => {
 
 app.get('/api/baskets/:id', async (_req, res) => {
   try {
-    const results = await getSingleBasketRequests(_req.params.id); 
+    const results = await sqlService.getSingleBasketRequests(_req.params.id); 
     /*
 
     Here we also need to quert mongo and get all the requests with matching uuids and parce them together
@@ -58,7 +57,7 @@ app.get('/api/baskets/:id', async (_req, res) => {
 
 app.post('/api/baskets', async (_req, res) => {
   try {
-    const results = await addNewBasket(String(newCounter())); 
+    const results = await sqlService.addNewBasket(String(generateId())); 
     console.log(results);
   } catch (err) {
     console.error(err); 
@@ -68,7 +67,8 @@ app.post('/api/baskets', async (_req, res) => {
 
 app.delete('/api/baskets/:id', async (_req, res) => {
   try {
-    const results = await deleteBasket(_req.params.id); 
+    const results = await sqlService.deleteBasket(_req.params.id);
+    //delete bodies from mongo 
     console.log(results);
   } catch (err) {
     console.error(err); 
@@ -77,17 +77,23 @@ app.delete('/api/baskets/:id', async (_req, res) => {
 });
 
 
-app.all('/basket/:uniqueURL', async (req, res) => {
+app.all('/basket/:basket_name', async (req, res) => {
   try {
-    const url = req.params.uniqueURL;
-    const results = await getAllBaskets();
-    if (results.map(obj => obj.basket_name).includes(url)) {
-      res.json(req.method);
+    const currentBasketName = req.params.basket_name;
+    const results = await sqlService.getAllBaskets();
+    if (results.map(obj => obj.basket_name).includes(currentBasketName)) {
+      const requestObj: NewRequest = {
+        id: generateId(),
+        basket_id: currentBasketName,
+        method: req.method,
+        path: req.path,
+        headers:  JSON.stringify(req.headers),
+        time: Date.now().toString()
+      };
 
-      //create a UUID for the request 
-      //parse the request and insert parts into mongo and parts into sql 
-      
-
+      res.json(requestObj);
+      await sqlService.addRequest(requestObj);
+      //parse the request and insert parts into mongo and parts into sql       
     } else {  
       console.log('BAD request to get url');
       res.status(404).send('No basket with that name was found!');

@@ -19,7 +19,8 @@ CREATE TABLE IF NOT EXISTS requests (
   basket_id VARCHAR(10) NOT NULL REFERENCES baskets(basket_name) ON DELETE CASCADE, 
   path VARCHAR(100), 
   method VARCHAR(100), 
-  headers JSON
+  headers VARCHAR,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Insert seed data into baskets
