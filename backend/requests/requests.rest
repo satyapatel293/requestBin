@@ -3,11 +3,11 @@ GET http://localhost:3000/api/baskets
 ###
 
 
-GET http://localhost:3000/api/baskets/BASKET001
+GET http://localhost:3000/api/baskets/BASKET002
 
 ###
 
-DELETE http://localhost:3000/api/baskets/BASKET002
+DELETE http://localhost:3000/api/baskets/BASKET001
 
 ###
 

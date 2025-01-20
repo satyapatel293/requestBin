@@ -90,6 +90,7 @@ we are going to add it to the requests SQL table with the new uuid and basketnam
 we are going to add it to the requests MONGO table with the new uuid and basketname(:someUniquePath)
 
 we dont need to return anything valuable
+we configure nginx to look for /api and /bin to send to backend 
 
 */
 
