@@ -11,7 +11,7 @@ function Home () {
   useEffect(() => {
     services.getAllBaskets()
       .then(response => setBaskets(response));
-  });
+  }, []);
 
   const navigate = useNavigate();
 
@@ -35,7 +35,7 @@ function Home () {
   };
 
   const getBasket = async () => {
-    const response = await services.getBasketRequests('1234567890');
+    const response = await services.getBasketRequests("BASKET001");
     console.log(response);
   }
 
@@ -54,7 +54,7 @@ function Home () {
       <button onClick={getAll}>Get All</button>
 
       {baskets.map(({basket_name}) => {
-        return <p>{basket_name}</p>
+        return <p key={basket_name}>{basket_name}</p>
       })}
       {/* make this map into clickable items that navigate to basket's requests page */}
     </>
