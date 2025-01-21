@@ -1,7 +1,8 @@
 import express from 'express';
 import { connectDB } from '../postgreSQL/sql_connection';
 import sqlService from '../postgreSQL/queries';
-import { NewRequest } from '../types';
+import mongoService from '../mongoDB/models/basket';
+import { Headers, NewRequest, Body } from '../types';
 import { v4 as uuidv4 } from 'uuid';
 import cors from 'cors';
 
@@ -42,13 +43,32 @@ app.get('/api/baskets', async (_req, res) => {
 app.get('/api/baskets/:id', async (_req, res) => {
   try {
     const results = await sqlService.getBasketRequests(_req.params.id); 
-    /*
+    const id = _req.params.id;
+    const bodies =   await mongoService.find({ basket_id: id})
+    .then(request => {
+      return request as Body[];
+    }).catch((error) => {
+      if (error instanceof Error) {
+        console.log("Error seeding data:", error.message);
+      } else {
+        console.log("some error");
+      }
+    });
 
-    Here we also need to quert mongo and get all the requests with matching uuids and parce them together
-    and we need to return them all parced the way the frontend needs them
-    */
- 
-    res.json(results);  
+
+    const finalResult: { body: string; id: string | number; basket_id: string; path: string; method: string; headers: Headers; }[] = [];
+
+    results.forEach(result => {
+      let current;
+      if (bodies) {
+         current = bodies.find(body => body.request_id === result.id);
+      }
+      if (current) {
+        finalResult.push({...result, body: current.body});
+      }
+    });
+
+    res.json(finalResult);  
   } catch (err) {
     console.error(err); 
     res.status(500).send('An error occurred fetching a single basket');  
@@ -95,6 +115,14 @@ app.all('/basket/:basket_name', async (req, res) => {
       while (ids.map(obj => obj.id).includes(requestId)) {
         requestId = generateId();
       }
+
+      const requestBody = new mongoService( {
+        request_id: requestId,
+        basket_id: currentBasketName,
+        body: JSON.stringify(req.body),
+      });
+
+      await requestBody.save();
 
       const requestObj: NewRequest = {
         id: requestId,

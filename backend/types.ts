@@ -21,5 +21,14 @@ id: string | number,
 basket_id: string,
 path: string,
 method: string, 
-headers: Headers
+headers: Headers,
+body?: string
 }
+
+export interface Body {
+  _id: object,
+  request_id: string,
+  basket_id: string,
+  body: string,
+  __v: number
+};
