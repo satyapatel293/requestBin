@@ -52,7 +52,11 @@ function BasketPage({ id }: BasketPageProps) {
   const borderStyle = {
     backgroundColor: "#D7A1FF",
     borderRadius: 15,
-    border: '5px dashed #C9FFA1'
+    border: '5px dashed #C9FFA1',
+    width: '800px',
+    margin: '0 auto',
+    paddingLeft: '10px',
+    paddingRight: '10px'
   }
 
   // Color Palette (Tetradic):
@@ -62,9 +66,9 @@ function BasketPage({ id }: BasketPageProps) {
   // A1F8FF - light sky blue
 
   return (
-    <div>
+    <div style={{margin: '0 auto'}}>
       <Header pageTitle={`Basket: ${id}`} />
-      <p>Requests are collected at: THIS URL</p>
+      <p>Requests are collected at: whateverThisIs.com/basket/{id}</p>
       <div style={borderStyle}>
       {requests.map((request: Request) => {
         console.log(request['id']);

@@ -7,7 +7,7 @@ export interface Request {
   basket_id: string; // added
   time: number;
   path: string;
-  requestMethod: string;
+  method: string;
   params: string | null;
   headers: Header;
   body: string;

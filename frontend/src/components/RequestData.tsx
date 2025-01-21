@@ -1,13 +1,14 @@
 import { RequestDataProps } from "../types";
 import { useState } from 'react';
+import RequestAttributes from './RequestAttributes';
 
 function RequestData({ path, headers, params, body }: RequestDataProps) {
   const [isHovered, setIsHovered] = useState(false);
 
-  function isParams(params: string | null) {
+  function isProvided(params: string | null, title: string) {
     if (params) {
       return (
-        <div>{params}</div>
+        <RequestAttributes title={title} value={params}/>
       )
     }
   }
@@ -19,27 +20,27 @@ function RequestData({ path, headers, params, body }: RequestDataProps) {
     color: '#003366',
   }
 
-  const handleHover = () => setIsHovered(true);
-  const handleMouseLeave = () => setIsHovered(false);
+
+
+  const handleHoverChange = () => setIsHovered((val) => !val);
+  // const handleMouseLeave = () => setIsHovered(false);
 
   return (
-    <fieldset>
-      <div style={barStyle}
-        onMouseEnter={handleHover}
-        onMouseLeave={handleMouseLeave}
+    <div style={{display: 'inline-block'}}>
+    {/* <fieldset> */}
+      {/* <div style={barStyle}
+        onMouseEnter={handleHoverChange}
+        onMouseLeave={handleHoverChange}
       >
         <p>Route: {path}</p>
-      </div>
-      <div>
-        <p>Headers: {JSON.stringify(headers)}</p>
-      </div>
+      </div> */}
+      <RequestAttributes title="Route" value={path} />
+      <RequestAttributes title="Headers" value={JSON.stringify(headers)} />
 
-      {isParams(params)}
-
-      <div>
-        <p>Payload: {body}</p>
-      </div>
-    </fieldset>
+      {isProvided(params, 'Query Parameters')}
+      {isProvided(body, 'Payload')}
+    {/* </fieldset> */}
+    </div>
   )
 }
 
