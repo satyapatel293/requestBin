@@ -49,14 +49,28 @@ function BasketPage({ id }: BasketPageProps) {
     }
   }, []);
 
+  const borderStyle = {
+    backgroundColor: "#D7A1FF",
+    borderRadius: 15,
+    border: '5px dashed #C9FFA1'
+  }
+
+  // Color Palette (Tetradic):
+  // D7A1FF - light purple
+  // FFA841 - peach
+  // C9FFA1 - light lime green
+  // A1F8FF - light sky blue
+
   return (
     <div>
       <Header pageTitle={`Basket: ${id}`} />
       <p>Requests are collected at: THIS URL</p>
+      <div style={borderStyle}>
       {requests.map((request: Request) => {
         console.log(request['id']);
         return <RequestItem key={request.id} request={request} />;
       })}
+      </div>
       This is BasketPage {id}
     </div>
   );

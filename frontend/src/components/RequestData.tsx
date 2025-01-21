@@ -1,7 +1,8 @@
-import { RequestDataProps } from "../types"
+import { RequestDataProps } from "../types";
+import { useState } from 'react';
 
 function RequestData({ path, headers, params, body }: RequestDataProps) {
-
+  const [isHovered, setIsHovered] = useState(false);
 
   function isParams(params: string | null) {
     if (params) {
@@ -11,9 +12,22 @@ function RequestData({ path, headers, params, body }: RequestDataProps) {
     }
   }
 
+  const barStyle = {
+    backgroundColor: isHovered ? '#00E8FA' : '#A1F8FF',
+    padding: '10px',
+    borderRadius: '5px',
+    color: '#3C8715',
+  }
+
+  const handleHover = () => setIsHovered(true);
+  const handleMouseLeave = () => setIsHovered(false);
+
   return (
-    <div>
-      <div>
+    <fieldset>
+      <div style={barStyle}
+        onMouseEnter={handleHover}
+        onMouseLeave={handleMouseLeave}
+      >
         <p>Route: {path}</p>
       </div>
       <div>
@@ -25,7 +39,7 @@ function RequestData({ path, headers, params, body }: RequestDataProps) {
       <div>
         <p>Payload: {body}</p>
       </div>
-    </div>
+    </fieldset>
   )
 }
 
