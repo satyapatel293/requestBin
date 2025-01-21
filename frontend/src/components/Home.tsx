@@ -43,6 +43,7 @@ function Home () {
     const response = await services.getAllBaskets()
     console.log(response);
   }
+  
   return (
     <>
       <Header pageTitle='New Basket'/>
