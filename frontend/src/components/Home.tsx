@@ -46,12 +46,12 @@ function Home () {
   
   return (
     <>
-      <Header pageTitle='New Basket'/>
+      <Header pageTitle='Basket Case'/>
       <p>Create a new basket that will collect and inspect Requests</p>
       <button onClick={createBasketButtonHandler}>Create new Basket</button>
-      <button onClick={deleteBasket}>Delete</button>
-      <button onClick={getBasket}>Get Basket's Requests</button> {/* pass it value number(1234567890)*/}
-      <button onClick={getAll}>Get All</button>
+      {/* <button onClick={deleteBasket}>Delete</button>
+      <button onClick={getBasket}>Get Basket's Requests</button> pass it value number(1234567890)
+      <button onClick={getAll}>Get All</button> */}
 
       {baskets.map(({basket_name}) => {
         return <p key={basket_name}>{basket_name}</p>

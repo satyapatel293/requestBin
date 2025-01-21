@@ -16,7 +16,7 @@ function RequestData({ path, headers, params, body }: RequestDataProps) {
     backgroundColor: isHovered ? '#00E8FA' : '#A1F8FF',
     padding: '10px',
     borderRadius: '5px',
-    color: '#3C8715',
+    color: '#003366',
   }
 
   const handleHover = () => setIsHovered(true);

@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap'); /* Lobster */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap'); /* Nunito */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&display=swap');/* Quicksand */
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap'); /* Pacifico */
+
+
 /* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -12,6 +18,10 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 } */
+
+#root {
+  padding: 20px;
+}
 
 a {
   font-weight: 500;
@@ -29,6 +39,7 @@ body {
   min-width: 320px;
   min-height: 100vh;
   background-color: #FFA841;
+  font-family: 'Pacifico';
 }
 
 h1 {
@@ -37,19 +48,30 @@ h1 {
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
+  border-radius: 10px;
+  border: 1px solid #3F0066;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #D7A1FF;
   cursor: pointer;
   transition: border-color 0.25s;
+  box-shadow: 2px 2px 5px #561d79, inset -2px -3px #553f99;
+  width: 200px;
+  height: 50px;
+  color: #3F0066;
 }
 button:hover {
   border-color: #646cff;
 }
+
+button:active {
+  box-shadow: inset 1px 1px 3px #3F0066;
+  font-size: 0.99em;
+}
+
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;

@@ -5,7 +5,7 @@ function Header({ pageTitle }: HeaderProps) {
 
   return (
     <>
-    <h2>{pageTitle}</h2>
+    <h2 style={{color: '#5A2D0C'}}>{pageTitle}</h2>
     </>
   )
 }
