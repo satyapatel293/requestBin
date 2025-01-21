@@ -41,7 +41,7 @@ app.get('/api/baskets', async (_req, res) => {
 
 app.get('/api/baskets/:id', async (_req, res) => {
   try {
-    const results = await sqlService.getSingleBasketRequests(_req.params.id); 
+    const results = await sqlService.getBasketRequests(_req.params.id); 
     /*
 
     Here we also need to quert mongo and get all the requests with matching uuids and parce them together
@@ -57,7 +57,14 @@ app.get('/api/baskets/:id', async (_req, res) => {
 
 app.post('/api/baskets', async (_req, res) => {
   try {
-    const results = await sqlService.addNewBasket(String(generateId())); 
+    let newBasket = generateId();
+    const names = await sqlService.getAllBaskets();
+
+    while (names.map(obj => obj.basket_name).includes(newBasket)) {
+      newBasket = generateId();
+    }
+
+    const results = await sqlService.addNewBasket(newBasket); 
     console.log(results);
   } catch (err) {
     console.error(err); 
@@ -82,8 +89,15 @@ app.all('/basket/:basket_name', async (req, res) => {
     const currentBasketName = req.params.basket_name;
     const results = await sqlService.getAllBaskets();
     if (results.map(obj => obj.basket_name).includes(currentBasketName)) {
+      let requestId = generateId();
+      const ids = await sqlService.getAllRequestIds();
+  
+      while (ids.map(obj => obj.id).includes(requestId)) {
+        requestId = generateId();
+      }
+
       const requestObj: NewRequest = {
-        id: generateId(),
+        id: requestId,
         basket_id: currentBasketName,
         method: req.method,
         path: req.path,
@@ -91,8 +105,9 @@ app.all('/basket/:basket_name', async (req, res) => {
         time: Date.now().toString()
       };
 
-      res.json(requestObj);
       await sqlService.addRequest(requestObj);
+      console.log('posted request to db');
+      res.status(200);
       //parse the request and insert parts into mongo and parts into sql       
     } else {  
       console.log('BAD request to get url');
@@ -106,7 +121,6 @@ app.all('/basket/:basket_name', async (req, res) => {
 
 
 /*
-app.all('/bin/:someUniquePath') //catch all 
 
 ok so this is going to catch all incoming requests 
 we are going to use :someUniquePath to check if that exists 
