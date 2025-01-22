@@ -1,5 +1,6 @@
 import { client } from "./sql_connection";
-import { Baskets, NewRequest, Requests } from "../types";
+import { Baskets, JsonBody, NewRequest, Requests } from "../types";
+import { v4 as uuidv4 } from "uuid";
 
 const getAllBaskets = async (): Promise<Baskets[]> => {
   try {
@@ -16,13 +17,13 @@ const getAllBaskets = async (): Promise<Baskets[]> => {
   }
 };
 
-const getBasketRequests = async (basket_id: string): Promise<Requests[]> => {
+const getBasketRequests = async (basket_name: string): Promise<Requests[]> => {
   try {
-    const result = await client.query(
+    const result = await client.query<Requests>(
       `SELECT * FROM requests WHERE basket_id = $1`,
-      [basket_id]
+      [basket_name]
     );
-    return result.rows as Requests[];
+    return result.rows;
   } catch (err) {
     if (err instanceof Error) {
       throw new Error(
@@ -34,17 +35,13 @@ const getBasketRequests = async (basket_id: string): Promise<Requests[]> => {
   }
 };
 
-const deleteBasket = async (basket_id: string): Promise<string> => {
+const deleteBasket = async (basket_name: string): Promise<string> => {
   try {
-    const result2 = await client.query(
-      `DELETE FROM baskets WHERE basket_name = $1`,
-      [basket_id]
-    );
     const result = await client.query(
-      `DELETE FROM requests WHERE basket_id = $1`,
-      [basket_id]
+      `DELETE FROM baskets WHERE basket_name = $1`,
+      [basket_name]
     );
-    return `${result.rowCount}, ${result2.rowCount} rows were deleted`;
+    return `${result.rowCount} basket was deleted`;
   } catch (err) {
     if (err instanceof Error) {
       throw new Error(
@@ -56,13 +53,13 @@ const deleteBasket = async (basket_id: string): Promise<string> => {
   }
 };
 
-
-const addNewBasket = async (basket_id: string): Promise<string> => {
+const addNewBasket = async (basket_name: string): Promise<JsonBody> => {
   try {
-    const result = await client.query(`INSERT INTO baskets VALUES ($1)`, [
-      basket_id,
-    ]);
-    return `${result.rowCount} row was added`;
+    await client.query(`INSERT INTO baskets VALUES ($1)`, [basket_name]);
+    return { 
+      basket_name: `/basket/${basket_name}`,
+      basket_url: `/web/${basket_name}`
+    };
   } catch (err) {
     if (err instanceof Error) {
       throw new Error(
@@ -73,7 +70,6 @@ const addNewBasket = async (basket_id: string): Promise<string> => {
     }
   }
 };
-
 
 const addRequest = async (requestObj: NewRequest): Promise<string> => {
   try {
@@ -105,10 +101,10 @@ const addRequest = async (requestObj: NewRequest): Promise<string> => {
   return "hey";
 };
 
-const getAllRequestIds = async (): Promise<Requests[]>  => {
+const getAllRequestIds = async (): Promise<Requests[]> => {
   try {
-    const result = await client.query("SELECT id FROM requests");
-    return result.rows as Requests[];
+    const result = await client.query<Requests>("SELECT id FROM requests");
+    return result.rows;
   } catch (err) {
     if (err instanceof Error) {
       throw new Error(
@@ -120,7 +116,34 @@ const getAllRequestIds = async (): Promise<Requests[]>  => {
   }
 };
 
+const generateId = () => {
+  const uuid = uuidv4();
+  return uuid.slice(0, 10);
+};
 
+const existingBasket = async (newBasket:string) => {
+  const basketIds = await getAllBaskets();
+  return basketIds.map((obj) => obj.basket_name).includes(newBasket);
+};
+
+const generateBasketId = async (): Promise<string> => {
+  let newBasket = generateId();
+  while (await existingBasket(newBasket)) {
+    newBasket = generateId();
+  }
+
+  return newBasket;
+};
+
+const generateRequestId = async (): Promise<string> => {
+  let requestId = generateId();
+  const ids = await getAllRequestIds();
+
+  while (ids.map((obj) => obj.id).includes(requestId)) {
+    requestId = generateId();
+  }
+  return requestId;
+};
 
 export default {
   getAllBaskets,
@@ -128,5 +151,8 @@ export default {
   deleteBasket,
   addRequest,
   addNewBasket,
-  getAllRequestIds
+  getAllRequestIds,
+  generateBasketId,
+  generateRequestId,
+  existingBasket
 };

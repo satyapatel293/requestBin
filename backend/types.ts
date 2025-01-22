@@ -1,8 +1,4 @@
-export interface Headers {
-  [key:string] : string
-}
-
-export interface BasicBody {
+export interface JsonBody {
   [key:string] : string
 }
 
@@ -17,11 +13,10 @@ export interface NewRequest {
 
 export interface Baskets {
   basket_name: string,
-  // created_at: string,
 }
 
 export interface Requests {
-id: string | number, 
+id: string, 
 basket_id: string,
 path: string,
 method: string, 
