@@ -2,7 +2,7 @@ import express from 'express';
 import { connectDB } from '../postgreSQL/sql_connection';
 import sqlService from '../postgreSQL/queries';
 import mongoService from '../mongoDB/models/basket';
-import { Headers, NewRequest, Body } from '../types';
+import { Headers, NewRequest, Body, BasicBody, Requests } from '../types';
 import { v4 as uuidv4 } from 'uuid';
 import cors from 'cors';
 
@@ -55,9 +55,7 @@ app.get('/api/baskets/:id', async (_req, res) => {
       }
     });
 
-
-    const finalResult: { body: string; id: string | number; basket_id: string; path: string; method: string; headers: Headers; }[] = [];
-
+    const finalResult: Requests[] = [];
     results.forEach(result => {
       let current;
       if (bodies) {
@@ -68,7 +66,12 @@ app.get('/api/baskets/:id', async (_req, res) => {
       }
     });
 
-    res.json(finalResult);  
+    const someNewObj = finalResult.map(el => {
+      const body = el.body || '{}';
+      return {...el, body: JSON.parse(body) as BasicBody, headers: JSON.parse(el.headers) as Headers};
+    });
+
+    res.json(someNewObj);  
   } catch (err) {
     console.error(err); 
     res.status(500).send('An error occurred fetching a single basket');  
@@ -121,6 +124,7 @@ app.all('/basket/:basket_name', async (req, res) => {
         basket_id: currentBasketName,
         body: JSON.stringify(req.body),
       });
+      console.log(requestBody); 
 
       await requestBody.save();
 
@@ -149,7 +153,6 @@ app.all('/basket/:basket_name', async (req, res) => {
 
 
 /*
-
 ok so this is going to catch all incoming requests 
 we are going to use :someUniquePath to check if that exists 
 
@@ -160,7 +163,6 @@ we are going to add it to the requests MONGO table with the new uuid and basketn
 
 we dont need to return anything valuable
 we configure nginx to look for /api and /bin to send to backend 
-
 */
 
 

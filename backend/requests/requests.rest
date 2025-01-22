@@ -7,16 +7,20 @@ GET http://localhost:3000/api/baskets/BASKET001
 
 ###
 
-DELETE http://localhost:3000/api/baskets/1d319605-f
+DELETE http://localhost:3000/api/baskets/32fe85d0-0
 
 ###
 
 POST http://localhost:3000/api/baskets
 
 ### add item to request basket
-POST http://localhost:3000/basket/57877844-4
+POST http://localhost:3000/basket/BASKET001
+Content-Type: application/json
 
-
+{
+  "message": "",
+  "another": "hiiiii"
+}
 
 ### add item to request basket
-GET http://localhost:3000/basket/57877844-4
+GET http://localhost:3000/basket/BASKET001

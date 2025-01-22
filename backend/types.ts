@@ -2,6 +2,10 @@ export interface Headers {
   [key:string] : string
 }
 
+export interface BasicBody {
+  [key:string] : string
+}
+
 export interface NewRequest {
   id: string,
   basket_id: string,
@@ -21,8 +25,8 @@ id: string | number,
 basket_id: string,
 path: string,
 method: string, 
-headers: Headers,
-body?: string
+headers: string,
+body: string 
 }
 
 export interface Body {
