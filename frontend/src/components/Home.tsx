@@ -22,7 +22,7 @@ function Home () {
     // alert('You clicked the button!');
     try {
       const id = await services.createBasket();
-      console.log('A new basket was created! Rejoice!!!');
+      
       navigate(`/web/${id}`);
     } catch (err: unknown) {
       if (err instanceof Error) {

@@ -1,0 +1,11 @@
+{
+  "api": {
+    "baskets": [
+      { "basket_name": "BASKET001" },
+      { "basket_name": "BASKET002" },
+      { "basket_name": "b6f12d70-1" },
+      { "basket_name": "faa2ff89-6" },
+      { "basket_name": "f8b3a4bf-2" }
+    ]
+  }
+}
