@@ -3,7 +3,7 @@ GET http://localhost:3000/api/baskets
 ###
 
 
-GET http://localhost:3000/api/baskets/d0f10046-d
+GET http://localhost:3000/api/baskets/21721c96-1
 
 ###
 
@@ -30,7 +30,7 @@ DELETE  http://localhost:3000/basket/d0f10046-d
 
 
 ###
-POST http://localhost:3000/basket/BASKET001
+POST http://localhost:3000/basket/21721c96-1
 Content-Type: application/json
 
 {

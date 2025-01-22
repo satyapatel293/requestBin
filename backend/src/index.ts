@@ -74,6 +74,19 @@ app.post("/api/baskets", async (_req, res) => {
 });
 
 // Delete a basket 
+app.delete("/api/baskets/:basket_name/requests", async (_req, res) => {
+  try {
+    const basketName = _req.params.basket_name;
+    await sqlService.deleteRequests(basketName);
+    await mongoService.deleteBodies(basketName);
+    res.status(200).send("Deleted Requests");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("An error occurred deleting requests in basket");
+  }
+});
+
+// Delete a basket 
 app.delete("/api/baskets/:basket_name", async (_req, res) => {
   try {
     const basketName = _req.params.basket_name;
@@ -85,6 +98,8 @@ app.delete("/api/baskets/:basket_name", async (_req, res) => {
     res.status(500).send("An error occurred deleting a basket with requests");
   }
 });
+
+
 
 // Add a new request to a basket 
 app.all("/basket/:basket_name", async (req, res) => {
