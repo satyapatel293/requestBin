@@ -21,8 +21,6 @@
 
 #root {
   padding: 20px;
-  display: flex;
-  justify-content: sp
 }
 
 a {
@@ -66,9 +64,9 @@ button {
   height: 50px;
   color: #3F0066;
 }
-button:hover {
+/* button:hover {
   border-color: #646cff;
-}
+} */
 
 button:active {
   box-shadow: inset 1px 1px 3px #3F0066;
@@ -92,4 +90,12 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+button.utility {
+  background-color: lightgray;
+  width: 10px;
+  height: 40px;
+  position: relative;
+  margin-right: 20px;
 }

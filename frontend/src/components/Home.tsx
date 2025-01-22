@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Header from "./Header";
 import services from '../services/basketService'
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Basket } from '../types';
 
 
@@ -48,6 +48,8 @@ function Home () {
     backgroundColor: "#FFF4E1",
     margin: 0,
   }
+
+  const baseUrl = 'http://localhost:5173/web/'
   return (
     <>
       <div style={headerStyle}>
@@ -55,13 +57,18 @@ function Home () {
       </div>
       <p>Create a new basket that will collect and inspect Requests</p>
       <button onClick={createBasketButtonHandler}>Create new Basket</button>
-      <button onClick={deleteBasket}>Delete</button>
+      {/* <button onClick={deleteBasket}>Delete</button>
       <button onClick={getBasket}>Get Basket's Requests</button> pass it value number(1234567890)
-      <button onClick={getAll}>Get All</button>
-
+      <button onClick={getAll}>Get All</button> */}
+      <ul>
       {baskets.map(({basket_name}) => {
-        return <p key={basket_name}>{basket_name}</p>
+        return (
+          <li key={basket_name} style={{listStyle: 'none'}}>
+            <Link  to={baseUrl + basket_name}>{basket_name}</Link>
+          </li>
+        )
       })}
+      </ul>
       {/* make this map into clickable items that navigate to basket's requests page */}
     </>
   )

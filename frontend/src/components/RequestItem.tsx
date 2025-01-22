@@ -14,13 +14,13 @@ function RequestItem({ request }: RequestProps) {
     alignItems: 'center',
   }
   
-  const buttonStyle: Styles = {
-    backgroundColor: 'lightgray',
-    width: '10px',
-    height: '40px',
-    position: 'relative',
-    marginRight: '20px',
-  }
+  // const buttonStyle: Styles = {
+  //   backgroundColor: 'lightgray',
+  //   width: '10px',
+  //   height: '40px',
+  //   position: 'relative',
+  //   marginRight: '20px',
+  // }
 
   const imageStyle: Styles = {
     position: 'absolute',
@@ -40,7 +40,7 @@ function RequestItem({ request }: RequestProps) {
         <RequestData path={request.path} headers={request.headers} params={request.params} body={request.body} />
         <div style={{display: 'inline-block'}}>
           <button
-            style={buttonStyle}
+            className="utility"
             onClick={() => navigator.clipboard.writeText(JSON.stringify(request, null, 2))}
             >
             <img style={imageStyle} src={copyBtn} alt="copy button" width="40" ></img>

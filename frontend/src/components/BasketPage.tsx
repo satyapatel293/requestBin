@@ -84,7 +84,7 @@ function BasketPage({ id }: BasketPageProps) {
   const copyPath = "http://localhost:3000/basket/" + String(id);
   return (
     <div style={{margin: '0 auto'}}>
-      <Header pageTitle={`Basket: ${id}`} />
+      <Header pageTitle={id as string} />
       <p>
         Requests are collected at: whateverThisIs.com/basket/{id}
         <button
