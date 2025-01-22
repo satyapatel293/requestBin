@@ -1,16 +1,12 @@
-export interface Header {
-  [key: string]: string;
-}
-
 export interface Request {
   id: string; // added
   basket_id: string; // added
-  time: number;
+  created_at: string;
   path: string;
   method: string;
-  params: string | null;
-  headers: Header;
-  body: string;
+  query_params: CustomObject;
+  headers: CustomObject;
+  body: CustomObject;
 }
 
 export interface HeaderProps {
@@ -27,15 +23,17 @@ export interface RequestProps {
 
 export interface RequestDataProps {
   path: string;
-  headers: Headers;
+  headers: CustomObject;
   params: string | null;
   body: string; // placeholder (might come back as json);
 }
 
-export interface Headers {
+export interface CustomObject {
   [key: string]: string;
 }
 
 export interface Styles {
   [key: string]: string | number;
 }
+
+// potentially change Header types to CustomObject in other places

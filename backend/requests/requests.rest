@@ -3,11 +3,11 @@ GET http://localhost:3000/api/baskets
 ###
 
 
-GET http://localhost:3000/api/baskets/BASKET001
+GET http://localhost:3000/api/baskets/d0f10046-d
 
 ###
 
-DELETE http://localhost:3000/api/baskets/30bd24a0-c
+DELETE http://localhost:3000/api/baskets/889ab7d4-c
 
 ###
 
@@ -26,7 +26,7 @@ Content-Type: application/json
 }
 
 ### add item to request basket
-DELETE  http://localhost:3000/basket/BASKET002
+DELETE  http://localhost:3000/basket/d0f10046-d
 
 
 ###
