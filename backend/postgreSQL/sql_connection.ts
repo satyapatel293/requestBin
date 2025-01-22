@@ -1,15 +1,17 @@
-import { Client } from 'pg';
+import { Pool } from 'pg';
 
-const client = new Client ({
+const pool = new Pool ({
     host: 'localhost',
     port: 5432,
     user: 'basketagent',
-    database: 'requestbasketdb'
+    database: 'requestbasketdb',
+    idleTimeoutMillis: 30000, 
+    connectionTimeoutMillis: 2000
 });
 
 const connectDB = async () => {
     try {
-        await client.connect();
+        await pool.query('SELECT 1');
         console.log('Connected to PostgreSQL');
     } catch (err) {
       if (err instanceof Error) {
@@ -20,4 +22,4 @@ const connectDB = async () => {
     }
 };
 
-export { client, connectDB };
+export { pool, connectDB };

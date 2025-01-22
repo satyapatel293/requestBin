@@ -1,10 +1,10 @@
-import { client } from "./sql_connection";
+import { pool } from "./sql_connection";
 import { Baskets, JsonBody, NewRequest, Requests } from "../types";
 import { v4 as uuidv4 } from "uuid";
 
 const getAllBaskets = async (): Promise<Baskets[]> => {
   try {
-    const result = await client.query("SELECT basket_name FROM baskets");
+    const result = await pool.query("SELECT basket_name FROM baskets");
     return result.rows as Baskets[];
   } catch (err) {
     if (err instanceof Error) {
@@ -19,7 +19,7 @@ const getAllBaskets = async (): Promise<Baskets[]> => {
 
 const getBasketRequests = async (basket_name: string): Promise<Requests[]> => {
   try {
-    const result = await client.query<Requests>(
+    const result = await pool.query<Requests>(
       `SELECT * FROM requests WHERE basket_id = $1`,
       [basket_name]
     );
@@ -37,7 +37,7 @@ const getBasketRequests = async (basket_name: string): Promise<Requests[]> => {
 
 const deleteBasket = async (basket_name: string): Promise<string> => {
   try {
-    const result = await client.query(
+    const result = await pool.query(
       `DELETE FROM baskets WHERE basket_name = $1`,
       [basket_name]
     );
@@ -55,7 +55,7 @@ const deleteBasket = async (basket_name: string): Promise<string> => {
 
 const deleteRequests = async (basket_name: string): Promise<string> => {
   try {
-    const result = await client.query(
+    const result = await pool.query(
       `DELETE FROM requests WHERE basket_id = $1`,
       [basket_name]
     );
@@ -73,7 +73,7 @@ const deleteRequests = async (basket_name: string): Promise<string> => {
 
 const addNewBasket = async (basket_name: string): Promise<JsonBody> => {
   try {
-    await client.query(`INSERT INTO baskets VALUES ($1)`, [basket_name]);
+    await pool.query(`INSERT INTO baskets VALUES ($1)`, [basket_name]);
     return { 
       basket_name: `/basket/${basket_name}`,
       basket_url: `/web/${basket_name}`
@@ -91,7 +91,7 @@ const addNewBasket = async (basket_name: string): Promise<JsonBody> => {
 
 const addRequest = async (requestObj: NewRequest): Promise<string> => {
   try {
-    await client.query(
+    await pool.query(
       `INSERT INTO requests (id, basket_id, path, method, headers, query_params)
       VALUES ($1, $2, $3, $4, $5, $6)`,
       [
@@ -122,7 +122,7 @@ const addRequest = async (requestObj: NewRequest): Promise<string> => {
 
 const getAllRequestIds = async (): Promise<Requests[]> => {
   try {
-    const result = await client.query<Requests>("SELECT id FROM requests");
+    const result = await pool.query<Requests>("SELECT id FROM requests");
     return result.rows;
   } catch (err) {
     if (err instanceof Error) {
