@@ -10,7 +10,10 @@ function Home () {
 
   useEffect(() => {
     services.getAllBaskets()
-      .then(response => setBaskets(response));
+      .then(response => {
+        console.log('Rejoice! Baskets are set');
+        setBaskets(response)
+  });
   }, []);
 
   const navigate = useNavigate();
@@ -19,6 +22,7 @@ function Home () {
     // alert('You clicked the button!');
     try {
       const id = await services.createBasket();
+      console.log('A new basket was created! Rejoice!!!');
       navigate(`/web/${id}`);
     } catch (err: unknown) {
       if (err instanceof Error) {
@@ -56,7 +60,7 @@ function Home () {
         <Header pageTitle='Basket Case'/>
       </div>
       <p>Create a new basket that will collect and inspect Requests</p>
-      <button onClick={createBasketButtonHandler}>Create new Basket</button>
+      <button className="createBtn" onClick={createBasketButtonHandler}>Create new Basket</button>
       {/* <button onClick={deleteBasket}>Delete</button>
       <button onClick={getBasket}>Get Basket's Requests</button> pass it value number(1234567890)
       <button onClick={getAll}>Get All</button> */}

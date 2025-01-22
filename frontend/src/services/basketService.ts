@@ -19,15 +19,21 @@ function getAllBaskets() {
 
 // delete a basket (DELETE)
 function deleteBasket(id: string) {
-  return axios.delete(baseUrl + "/" + String(id));
+  return axios.delete(baseUrl + "/" + String(id))
+    .catch(error => console.error('An error has occurred while deleting Basket', error.message));
 }
 
 // create a basket (CREATE)
 function createBasket() {
   return axios.post(baseUrl)
-    .then(response => response.data);
-    // ^assuming we are given the id from the backend
-    // if we add functionality for custom path, will need to throw error
+    .then(response => {
+      console.log('A new basket was created! Rejoice!!!');
+      console.log("CreateBasket response data:", response.data);
+      return response.data
+    })
+    .catch(error => {
+      console.error('An error has occurred!!!:', error.message);
+    });
 }
 
 // clear all requests for a baskets (UPDATE by clearing)
