@@ -24,22 +24,16 @@ function RequestData({ path, headers, params, body }: RequestDataProps) {
 
   const handleHoverChange = () => setIsHovered((val) => !val);
   // const handleMouseLeave = () => setIsHovered(false);
+  
 
+  let prettifiedJSON = JSON.stringify(headers, null, 2);
   return (
     <div style={{display: 'inline-block'}}>
-    {/* <fieldset> */}
-      {/* <div style={barStyle}
-        onMouseEnter={handleHoverChange}
-        onMouseLeave={handleHoverChange}
-      >
-        <p>Route: {path}</p>
-      </div> */}
       <RequestAttributes title="Route" value={path} />
-      <RequestAttributes title="Headers" value={JSON.stringify(headers)} />
+      <RequestAttributes title="Headers" value={prettifiedJSON} />
 
       {isProvided(params, 'Query Parameters')}
       {isProvided(body, 'Payload')}
-    {/* </fieldset> */}
     </div>
   )
 }

@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import { Request } from "../types";
+import { Request, Styles } from "../types";
 import services from "../services/basketService";
 import Header from "./Header";
 import RequestItem from "./RequestItem";
+import copyBtn from "../assets/copy icon.png";
 
 interface BasketPageProps {
   id: string | null | undefined;
@@ -56,7 +57,7 @@ function BasketPage({ id }: BasketPageProps) {
     width: '800px',
     margin: '0 auto',
     paddingLeft: '10px',
-    paddingRight: '10px'
+    paddingRight: '10px',
   }
 
   // Color Palette (Tetradic):
@@ -65,10 +66,34 @@ function BasketPage({ id }: BasketPageProps) {
   // C9FFA1 - light lime green
   // A1F8FF - light sky blue
 
+
+  const buttonStyle: Styles = {
+    backgroundColor: 'lightgray',
+    width: '10px',
+    height: '30px',
+    position: 'relative',
+    marginLeft: '10px',
+  }
+
+  const imageStyle: Styles = {
+    position: 'absolute',
+    top: 2,
+    left: 2,
+  }
+  
+  const copyPath = "http://localhost:3000/basket/" + String(id);
   return (
     <div style={{margin: '0 auto'}}>
       <Header pageTitle={`Basket: ${id}`} />
-      <p>Requests are collected at: whateverThisIs.com/basket/{id}</p>
+      <p>
+        Requests are collected at: whateverThisIs.com/basket/{id}
+        <button
+            style={buttonStyle}
+            onClick={() => navigator.clipboard.writeText(copyPath)}
+            >
+            <img style={imageStyle} src={copyBtn} alt="copy button" width="30" ></img>
+          </button>
+      </p>
       <div style={borderStyle}>
       {requests.map((request: Request) => {
         console.log(request['id']);

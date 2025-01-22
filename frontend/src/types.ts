@@ -35,3 +35,7 @@ export interface RequestDataProps {
 export interface Headers {
   [key: string]: string;
 }
+
+export interface Styles {
+  [key: string]: string | number;
+}

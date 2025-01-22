@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function RequestAttributes({title, value}) {
+function RequestAttributes({title, value}: {title: string, value: any}) {
   const [isHovered, setIsHovered] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -29,6 +29,8 @@ function RequestAttributes({title, value}) {
   const handleHoverChange = () => setIsHovered((val) => !val);
   const handleClick = () => setIsVisible((val) => !val);
 
+
+  // const prettifiedJSON = JSON.stringify(value, null, 2);
   return (
     <div style={{paddingBottom: '10px'}}>
       <div
@@ -40,7 +42,19 @@ function RequestAttributes({title, value}) {
         <p>{title}</p>
       </div>
       <div style={valueStyle}>
-        <p>{value}</p>
+      <pre
+        style={{
+          backgroundColor: "#2e2e4f",
+          color: "lime",
+          padding: "1rem",
+          borderRadius: "8px",
+          overflow: "auto",
+          fontFamily: "monospace",
+          textAlign: 'left',
+        }}
+      >
+        {value}
+      </pre>
       </div>
     </div>
   )

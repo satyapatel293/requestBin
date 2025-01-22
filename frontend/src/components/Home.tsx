@@ -44,9 +44,15 @@ function Home () {
     console.log(response);
   }
   
+  const headerStyle = {
+    backgroundColor: "#FFF4E1",
+    margin: 0,
+  }
   return (
     <>
-      <Header pageTitle='Basket Case'/>
+      <div style={headerStyle}>
+        <Header pageTitle='Basket Case'/>
+      </div>
       <p>Create a new basket that will collect and inspect Requests</p>
       <button onClick={createBasketButtonHandler}>Create new Basket</button>
       <button onClick={deleteBasket}>Delete</button>
