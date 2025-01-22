@@ -24,8 +24,8 @@ export interface RequestProps {
 export interface RequestDataProps {
   path: string;
   headers: CustomObject;
-  params: string | null;
-  body: string; // placeholder (might come back as json);
+  params: CustomObject;
+  body: CustomObject; // placeholder (might come back as json);
 }
 
 export interface CustomObject {

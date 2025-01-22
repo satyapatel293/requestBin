@@ -20,16 +20,18 @@
 } */
 
 #root {
-  padding: 20px;
+  /* padding: 20px; */
 }
 
 a {
   font-weight: 500;
-  color: #646cff;
+  font-size: 30px;
+  color: lime;
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: #E6367E;
+  -webkit-text-stroke: 1px black;
 }
 
 body {
@@ -38,7 +40,8 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  background-color: #FFA841;
+  /* background-color: #FFA841; */
+  background-color: slategray;
   font-family: 'Pacifico';
   text-align: center;
 }
@@ -47,6 +50,10 @@ h1 {
   font-size: 3.2em;
   line-height: 1.1;
   text-align: center;
+}
+
+h2 {
+  font-size: 3.0em;
 }
 
 button {

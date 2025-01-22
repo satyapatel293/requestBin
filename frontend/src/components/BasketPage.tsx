@@ -9,32 +9,9 @@ interface BasketPageProps {
   id: string | null | undefined;
 }
 
-const testRequests: Request[] = [
-  // {
-  //   time: Date.now(),
-  //   path: "/asdflsdf/",
-  //   requestMethod: "POST",
-  //   headers: { "Content-Type": "text/html" },
-  //   body: "<p>Hello</p>",
-  // },
-  // {
-  //   time: Date.now(),
-  //   path: "/boxcare/",
-  //   requestMethod: "DELETE",
-  //   headers: { "Content-Type": "text/html" },
-  //   body: "<p>Goodbye</p>",
-  // },
-  // {
-  //   time: Date.now(),
-  //   path: "/bopploop/",
-  //   requestMethod: "GET",
-  //   headers: { "Content-Type": "text/html" },
-  //   body: "<p>Oops</p>",
-  // },
-];
 
 function BasketPage({ id }: BasketPageProps) {
-  const [requests, setRequests] = useState<Request[]>(testRequests);
+  const [requests, setRequests] = useState<Request[]>([]);
   // grab all basket data for the given basket
   // useEffect
 
@@ -42,16 +19,14 @@ function BasketPage({ id }: BasketPageProps) {
     if (typeof id === "string") {
       services
         .getBasketRequests(id)
-        .then((data) => {
-          console.log(data);
-          setRequests(data);
-        })
+        .then((data) => setRequests(data))
         .catch((error) => console.error(error.message));
     }
   }, []);
 
   const borderStyle = {
-    backgroundColor: "#D7A1FF",
+    // backgroundColor: "#D7A1FF",
+    backgroundColor: ' #487AC7',
     borderRadius: 15,
     border: '5px dashed #C9FFA1',
     width: '800px',
@@ -60,12 +35,29 @@ function BasketPage({ id }: BasketPageProps) {
     paddingRight: '10px',
   }
 
+  // const borderStyle = {
+  //   backgroundColor: "#D7A1FF",
+  //   borderRadius: 15,
+  //   border: '5px dashed #C9FFA1',
+  //   width: '800px',
+  //   margin: '0 auto',
+  //   paddingLeft: '10px',
+  //   paddingRight: '10px',
+  // }
+
   // Color Palette (Tetradic):
   // D7A1FF - light purple
   // FFA841 - peach
   // C9FFA1 - light lime green
   // A1F8FF - light sky blue
 
+  // Chelsea
+  // #487AC7 warm blue
+  // #5448C7 dark blue
+  // #48BAC7 turqoise
+
+  //  hot pink #E636D6
+  //  #E6367E yuck lips
 
   const buttonStyle: Styles = {
     backgroundColor: 'lightgray',
@@ -77,10 +69,21 @@ function BasketPage({ id }: BasketPageProps) {
 
   const imageStyle: Styles = {
     position: 'absolute',
-    top: 2,
-    left: 2,
+    top: 1,
+    left: 5,
   }
   
+  const renderRequests = (requestData: Request[]) => {
+    if (requestData.length === 0) {
+      return <p>There are currently no requests for this Basket</p>
+    } else {
+      return requestData.map((request: Request) => {
+        return <RequestItem key={request.id} request={request} />;
+      });
+    }
+  }
+
+
   const copyPath = "http://localhost:3000/basket/" + String(id);
   return (
     <div style={{margin: '0 auto'}}>
@@ -95,12 +98,8 @@ function BasketPage({ id }: BasketPageProps) {
           </button>
       </p>
       <div style={borderStyle}>
-      {requests.map((request: Request) => {
-        console.log(request['id']);
-        return <RequestItem key={request.id} request={request} />;
-      })}
+        {renderRequests(requests)}
       </div>
-      This is BasketPage {id}
     </div>
   );
 }

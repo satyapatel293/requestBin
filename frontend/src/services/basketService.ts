@@ -32,7 +32,7 @@ function getAllBaskets() {
 function deleteBasket(id: string) {
   return axios.delete(baseUrl + "/" + String(id))
     .catch(error => console.error('An error has occurred while deleting Basket', error.message));
-}
+} 
 
 // create a basket (CREATE)
 function createBasket() {
@@ -54,7 +54,7 @@ function createBasket() {
 // clear all requests for a baskets (UPDATE by clearing)
 function deleteAllRequests(id: string) {
   return axios.delete(baseUrl + "/" + String(id) + "/requests");
-}
+} // returns nothing
 
 
 export default {
