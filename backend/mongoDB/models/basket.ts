@@ -23,17 +23,15 @@ const requestSchema = new mongoose.Schema({
 
 const requestBody = mongoose.model("Request", requestSchema);
 
+
+
+requestSchema.set('toJSON', {
+  transform: (_, returnedObject: { _id?: mongoose.Schema.Types.ObjectId; __v?: number; id?: string }) => {
+    // eslint-disable-next-line @typescript-eslint/no-base-to-string
+    returnedObject.id = returnedObject._id?.toString(); // Handle `_id` properly
+    delete returnedObject._id;
+    delete returnedObject.__v;
+  },
+});
+
 export default requestBody;
-
-
-
-
-
-// TODO need to add type to this returnedObject create interface for which contains above lines
-// requestSchema.set("toJSON", {
-//   transform: (document, returnedObject) => {
-//     returnedObject.id = returnedObject._id.toString();
-//     delete returnedObject._id;
-//     delete returnedObject.__v;
-//   },
-// });

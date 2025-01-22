@@ -8,7 +8,7 @@ export interface NewRequest {
   method: string,
   path: string,
   headers: string,
-  time: string
+  query_params: string,
 };
 
 export interface Baskets {
@@ -21,13 +21,12 @@ basket_id: string,
 path: string,
 method: string, 
 headers: string,
+query_params: string,
 body: string 
 }
 
 export interface Body {
-  _id: object,
   request_id: string,
   basket_id: string,
   body: string,
-  __v: number
 };

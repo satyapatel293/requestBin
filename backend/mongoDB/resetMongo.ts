@@ -1,5 +1,10 @@
 import requestBody from "./models/basket";
 
+// make a request_basket database in your local mongo
+// to reseed mongoDB please run 
+// npx ts-node [..path to this file] 
+// example: npx ts-node mongoDB/resetMongo.ts 
+
 requestBody
   .deleteMany({})
   .then(() => {

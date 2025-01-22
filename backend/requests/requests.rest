@@ -3,11 +3,11 @@ GET http://localhost:3000/api/baskets
 ###
 
 
-GET http://localhost:3000/api/baskets/c4292785-2
+GET http://localhost:3000/api/baskets/BASKET001
 
 ###
 
-DELETE http://localhost:3000/api/baskets/BASKET001
+DELETE http://localhost:3000/api/baskets/30bd24a0-c
 
 ###
 
@@ -26,4 +26,13 @@ Content-Type: application/json
 }
 
 ### add item to request basket
-DELETE  http://localhost:3000/basket/c4292785-2
+DELETE  http://localhost:3000/basket/BASKET002
+
+
+###
+POST http://localhost:3000/basket/BASKET001
+Content-Type: application/json
+
+{
+  "SpyID": "Bond James"
+}

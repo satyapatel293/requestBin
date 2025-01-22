@@ -74,14 +74,15 @@ const addNewBasket = async (basket_name: string): Promise<JsonBody> => {
 const addRequest = async (requestObj: NewRequest): Promise<string> => {
   try {
     await client.query(
-      `INSERT INTO requests (id, basket_id, path, method, headers)
-      VALUES ($1, $2, $3, $4, $5)`,
+      `INSERT INTO requests (id, basket_id, path, method, headers, query_params)
+      VALUES ($1, $2, $3, $4, $5, $6)`,
       [
         requestObj.id,
         requestObj.basket_id,
         requestObj.path,
         requestObj.method,
         requestObj.headers,
+        requestObj.query_params
       ]
     );
 

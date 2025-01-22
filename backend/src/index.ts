@@ -48,6 +48,7 @@ app.get("/api/baskets/:basket_name", async (_req, res) => {
       const body = currBody?.body || "{}";
       return {
         ...currRequest,
+        query_params: JSON.parse(currRequest.query_params) as JsonBody,
         body: JSON.parse(body) as JsonBody,
         headers: JSON.parse(currRequest.headers) as JsonBody,
       };
@@ -98,7 +99,7 @@ app.all("/basket/:basket_name", async (req, res) => {
         method: req.method,
         path: req.path,
         headers: JSON.stringify(req.headers),
-        time: Date.now().toString(),
+        query_params: JSON.stringify(req.query),
       });
       console.log("posted request to db");
       res.status(200);
