@@ -1,3 +1,6 @@
+-- to reseed postgresDB please run
+-- psql -U basketagent -d requestbasketdb -f psqlDbCreation.sql
+
 -- Start a transaction to ensure atomicity
 BEGIN;
 
@@ -19,7 +22,9 @@ CREATE TABLE IF NOT EXISTS requests (
   basket_id VARCHAR(10) NOT NULL REFERENCES baskets(basket_name) ON DELETE CASCADE, 
   path VARCHAR(100), 
   method VARCHAR(100), 
-  headers JSON
+  headers VARCHAR,
+  query_params VARCHAR,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Insert seed data into baskets
@@ -29,7 +34,7 @@ VALUES
   ('BASKET002');
 
 -- Insert seed data into requests
-INSERT INTO requests (id, basket_id, path, method, headers)
+INSERT INTO requests (id, basket_id, path, method, headers, query_params)
 VALUES
   (
     '1234567890', 
@@ -53,6 +58,10 @@ VALUES
       "accept-encoding": "gzip, deflate, br, zstd",
       "accept-language": "en-US,en;q=0.9",
       "if-none-match": "W/\"16-XNh242oFPdVWN/KW6AkHbzTJaVE\""
+    }',
+    '{ 
+      "testing": "working", 
+      "queryParam": "Hello"
     }'
   ),
   (
@@ -77,6 +86,10 @@ VALUES
       "accept-encoding": "gzip, deflate, br, zstd",
       "accept-language": "en-US,en;q=0.9",
       "if-none-match": "W/\"16-XNh242oFPdVWN/KW6AkHbzTJaVE\""
+    }',
+    '{ 
+      "testing": "working", 
+      "queryParam": "Hello"
     }'
   ),
   (
@@ -101,6 +114,10 @@ VALUES
       "accept-encoding": "gzip, deflate, br, zstd",
       "accept-language": "en-US,en;q=0.9",
       "if-none-match": "W/\"16-XNh242oFPdVWN/KW6AkHbzTJaVE\""
+    }',
+    '{ 
+      "testing": "working", 
+      "queryParam": "Hello"
     }'
   ),
   (
@@ -125,6 +142,10 @@ VALUES
       "accept-encoding": "gzip, deflate, br, zstd",
       "accept-language": "en-US,en;q=0.9",
       "if-none-match": "W/\"16-XNh242oFPdVWN/KW6AkHbzTJaVE\""
+    }',
+    '{ 
+      "testing": "working", 
+      "queryParam": "Hello"
     }'
   ),
   (
@@ -149,6 +170,10 @@ VALUES
       "accept-encoding": "gzip, deflate, br, zstd",
       "accept-language": "en-US,en;q=0.9",
       "if-none-match": "W/\"16-XNh242oFPdVWN/KW6AkHbzTJaVE\""
+    }',
+    '{ 
+      "testing": "working", 
+      "queryParam": "Hello"
     }'
   ),
   (
@@ -173,6 +198,10 @@ VALUES
       "accept-encoding": "gzip, deflate, br, zstd",
       "accept-language": "en-US,en;q=0.9",
       "if-none-match": "W/\"16-XNh242oFPdVWN/KW6AkHbzTJaVE\""
+    }',
+    '{ 
+      "testing": "working", 
+      "queryParam": "Hello"
     }'
   );
 
