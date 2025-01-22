@@ -45,7 +45,25 @@ const deleteBasket = async (basket_name: string): Promise<string> => {
   } catch (err) {
     if (err instanceof Error) {
       throw new Error(
-        `There was an error fetching the baskets from the database ${err.message}`
+        `There was an error deleting the baskets from the database ${err.message}`
+      );
+    } else {
+      throw new Error("Error");
+    }
+  }
+};
+
+const deleteRequests = async (basket_name: string): Promise<string> => {
+  try {
+    const result = await client.query(
+      `DELETE FROM requests WHERE basket_id = $1`,
+      [basket_name]
+    );
+    return `${result.rowCount} requests were deleted`;
+  } catch (err) {
+    if (err instanceof Error) {
+      throw new Error(
+        `There was an error deleting requests from the database ${err.message}`
       );
     } else {
       throw new Error("Error");
@@ -155,5 +173,6 @@ export default {
   getAllRequestIds,
   generateBasketId,
   generateRequestId,
-  existingBasket
+  existingBasket,
+  deleteRequests
 };

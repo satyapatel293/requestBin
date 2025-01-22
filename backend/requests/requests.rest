@@ -3,18 +3,26 @@ GET http://localhost:3000/api/baskets
 ###
 
 
-GET http://localhost:3000/api/baskets/BASKET001
+GET http://localhost:3000/api/baskets/BASKET002
 
 ###
 
-DELETE http://localhost:3000/api/baskets/30bd24a0-c
+DELETE http://localhost:3000/api/baskets/BASKET001
 
 ###
+
+###delete request basket
+DELETE  http://localhost:3000/api/baskets/BASKET001/requests
+
+
+
+###
+
 
 POST http://localhost:3000/api/baskets
 
 ### add item to request basket
-POST http://localhost:3000/basket/BASKET002?hey=lol&jk=yo+yo
+POST http://localhost:3000/basket/BASKET001?hey=lol&jk=yo+yo
 Content-Type: application/json
 
 {
@@ -25,10 +33,6 @@ Content-Type: application/json
   }
 }
 
-### add item to request basket
-DELETE  http://localhost:3000/basket/BASKET002
-
-
 ###
 POST http://localhost:3000/basket/BASKET001
 Content-Type: application/json
@@ -36,3 +40,7 @@ Content-Type: application/json
 {
   "SpyID": "Bond James"
 }
+
+###
+
+GET http://localhost:3000/basket/BASKET001
