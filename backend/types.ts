@@ -1,4 +1,4 @@
-export interface Headers {
+export interface JsonBody {
   [key:string] : string
 }
 
@@ -8,18 +8,25 @@ export interface NewRequest {
   method: string,
   path: string,
   headers: string,
-  time: string
+  query_params: string,
 };
 
 export interface Baskets {
   basket_name: string,
-  // created_at: string,
 }
 
 export interface Requests {
-id: string | number, 
+id: string, 
 basket_id: string,
 path: string,
 method: string, 
-headers: Headers
+headers: string,
+query_params: string,
+body: string 
 }
+
+export interface Body {
+  request_id: string,
+  basket_id: string,
+  body: string,
+};
