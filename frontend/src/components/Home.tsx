@@ -23,6 +23,7 @@ function Home () {
     try {
       const id = await services.createBasket();
       console.log('A new basket was created! Rejoice!!!');
+      console.log('The new basket ID is: ', id);
       navigate(`/web/${id}`);
     } catch (err: unknown) {
       if (err instanceof Error) {

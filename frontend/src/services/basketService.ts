@@ -25,6 +25,7 @@ function deleteBasket(id: string) {
 
 // create a basket (CREATE)
 function createBasket() {
+  console.log('the base url is: ', baseUrl);
   return axios.post(baseUrl)
     .then(response => {
       console.log('A new basket was created! Rejoice!!!');
@@ -33,6 +34,7 @@ function createBasket() {
     })
     .catch(error => {
       console.error('An error has occurred!!!:', error.message);
+      throw error; // added this
     });
 }
 
