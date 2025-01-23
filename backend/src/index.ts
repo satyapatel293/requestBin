@@ -117,7 +117,7 @@ app.all("/basket/:basket_name", async (req, res) => {
         query_params: JSON.stringify(req.query),
       });
       console.log("posted request to db");
-      res.status(200);
+      res.status(200).send('Request logs');
     } else {
       console.log("BAD request to get url");
       res.status(404).send("No basket with that name was found!");
