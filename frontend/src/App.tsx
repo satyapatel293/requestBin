@@ -1,6 +1,6 @@
 import Home from './components/Home';
 import BasketPage from './components/BasketPage';
-import { Routes, Route, useMatch } from 'react-router-dom';
+import { Routes, Route, useMatch, Navigate } from 'react-router-dom';
 
 function App() {
   const match = useMatch('/web/:id');
@@ -10,6 +10,7 @@ function App() {
     <>
       <Routes>
         {/* do we need a path for "/" to redirect to home page "/web/" */}
+        <Route path="/" element={<Navigate to="/web/" />} replace />
         <Route path="/web/" element={<Home />} />
         <Route path='/web/:id' element={<BasketPage id={id} />} />
       </Routes>
