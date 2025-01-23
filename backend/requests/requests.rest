@@ -1,0 +1,42 @@
+GET http://localhost:3000/api/baskets
+
+###
+
+
+GET http://localhost:3000/api/baskets/BASKET001
+
+###
+
+DELETE http://localhost:3000/api/baskets/fe3f5b11-4
+###
+
+POST http://localhost:3000/api/baskets
+
+### add item to request basket
+POST http://localhost:3000/basket/BASKET002?hey=lol&jk=yo+yo
+Content-Type: application/json
+
+{
+  "message": "hellllllooo down there!",
+  "another": "hiiiii",
+  "hey": {
+    "there": 21
+  }
+}
+
+### add item to request basket
+DELETE  http://localhost:3000/basket/fe3f5b11-4
+
+
+###
+POST http://localhost:3000/basket/fe3f5b11-4
+Content-Type: application/json
+
+{
+  "SpyID": "Bond James"
+}
+
+
+###
+
+DELETE  http://localhost:3000/api/baskets/fe3f5b11-4/requests

@@ -1,35 +1,20 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import Home from './components/Home';
+import BasketPage from './components/BasketPage';
+import { Routes, Route, useMatch } from 'react-router-dom';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const match = useMatch('/web/:id');
+  const id = match && match.params.id;
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Routes>
+        {/* do we need a path for "/" to redirect to home page "/web/" */}
+        <Route path="/web/" element={<Home />} />
+        <Route path='/web/:id' element={<BasketPage id={id} />} />
+      </Routes>
     </>
-  )
+  );
 }
 
 export default App
