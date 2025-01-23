@@ -19,7 +19,6 @@ function Home () {
   const navigate = useNavigate();
 
   const createBasketButtonHandler = async () => {
-    // alert('You clicked the button!');
     try {
       const response = await services.createBasket();
       const id = response.basket_url;
@@ -33,20 +32,6 @@ function Home () {
     }
   };
 
-  // const deleteBasket = async () => {
-  //   const response = await services.deleteBasket('1234567890');
-  //   console.log('check with the next button');
-  // };
-
-  // const getBasket = async () => {
-  //   const response = await services.getBasketRequests("BASKET001");
-  //   console.log(response);
-  // }
-
-  // const getAll = async () => {
-  //   const response = await services.getAllBaskets()
-  //   console.log(response);
-  // }
   
   const headerStyle = {
     backgroundColor: "#FFF4E1",
@@ -62,7 +47,26 @@ function Home () {
     marginTop: '20px'
   }
 
-  const baseUrl = 'http://localhost:5173/web/'
+  const renderBaskets = () => {
+    if (baskets.length === 0) {
+      return <p>There are currently no baskets.</p>
+    } else {
+      return (
+        <ul>
+          {baskets.map(({basket_name}) => {
+            return (
+              <li key={basket_name} style={{listStyle: 'none'}}>
+                <Link  to={baseUrl + basket_name}>{basket_name}</Link>
+              </li>
+            )
+          })}
+        </ul>
+      );
+    }
+  }
+
+  const baseUrl = import.meta.env.VITE_BASE_WEB;
+  
   return (
     <>
       <div style={headerStyle}>
@@ -71,18 +75,10 @@ function Home () {
       <p>Create a new basket that will collect and inspect Requests</p>
       <button className="createBtn" onClick={createBasketButtonHandler}>Create new Basket</button>
       <div style={basketListStyle}>
-        <ul>
-        {baskets.map(({basket_name}) => {
-          return (
-            <li key={basket_name} style={{listStyle: 'none'}}>
-              <Link  to={baseUrl + basket_name}>{basket_name}</Link>
-            </li>
-          )
-        })}
-        </ul>
+        {renderBaskets()}
       </div>
     </>
   )
 }
 
-export default Home;
+export default Home

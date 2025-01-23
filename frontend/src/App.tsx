@@ -1,10 +1,6 @@
-// import React, { useState } from 'react';
 import Home from './components/Home';
 import BasketPage from './components/BasketPage';
 import { Routes, Route, useMatch } from 'react-router-dom';
-// Link,
-
-// useNavigate redirects (if redirected after basket creation)
 
 function App() {
   const match = useMatch('/web/:id');

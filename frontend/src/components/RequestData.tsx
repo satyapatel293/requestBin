@@ -1,5 +1,4 @@
 import { CustomObject, RequestDataProps } from "../types";
-import { useState } from 'react';
 import RequestAttributes from './RequestAttributes';
 
 function RequestData({ path, headers, params, body }: RequestDataProps) {
@@ -27,4 +26,3 @@ function RequestData({ path, headers, params, body }: RequestDataProps) {
 }
 
 export default RequestData;
-// remember we may get query params back from backend

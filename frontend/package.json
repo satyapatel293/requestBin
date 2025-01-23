@@ -8,7 +8,9 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "mock": "json-server --watch ./db/db.json --routes ./db/routes.json"
+    "mock": "json-server --watch ./db/db.json --routes ./db/routes.json",
+    "copy-build": "cp -r ./dist ../backend/",
+    "deploy-build": "cd ../backend/ && rm -rf dist/ && cd ../frontend && npm run copy-build" 
   },
   "dependencies": {
     "axios": "^1.7.9",

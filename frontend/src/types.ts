@@ -36,4 +36,9 @@ export interface Styles {
   [key: string]: string | number;
 }
 
+export interface BasketPageProps {
+  id: string | null | undefined;
+}
+
+
 // potentially change Header types to CustomObject in other places

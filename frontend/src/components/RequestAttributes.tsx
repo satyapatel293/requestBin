@@ -29,8 +29,6 @@ function RequestAttributes({title, value}: {title: string, value: any}) {
   const handleHoverChange = () => setIsHovered((val) => !val);
   const handleClick = () => setIsVisible((val) => !val);
 
-
-  // const prettifiedJSON = JSON.stringify(value, null, 2);
   return (
     <div style={{paddingBottom: '10px'}}>
       <div

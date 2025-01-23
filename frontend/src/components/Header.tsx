@@ -25,7 +25,7 @@ const trashStyle: Styles = {
   left: 0,
 }
 
-const baseUrl = 'http://localhost:5173/web';
+const baseUrl = import.meta.env.VITE_BASE_WEB;
 
 function Header({ pageTitle }: HeaderProps) {
 

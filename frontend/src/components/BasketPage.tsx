@@ -1,17 +1,12 @@
 import { useState, useEffect } from "react";
-import { Request, Styles } from "../types";
+import { Request, Styles, BasketPageProps } from "../types";
 import services from "../services/basketService";
 import Header from "./Header";
 import RequestItem from "./RequestItem";
 import copyBtn from "../assets/copy icon.png";
 
-interface BasketPageProps {
-  id: string | null | undefined;
-}
-
-
 function BasketPage({ id }: BasketPageProps) {
-  const [requests, setRequests] = useState<Request[]>([]);
+  const [requests, setRequests] = useState<Request[]>([]);  
 
   useEffect(() => {
     if (typeof id === "string") {
@@ -31,7 +26,6 @@ function BasketPage({ id }: BasketPageProps) {
     paddingLeft: '10px',
     paddingRight: '10px',
   }
-
 
   const buttonStyle: Styles = {
     backgroundColor: 'lightgray',
@@ -58,7 +52,7 @@ function BasketPage({ id }: BasketPageProps) {
   }
 
 
-  const copyPath = "http://localhost:3000/basket/" + String(id);
+  const copyPath = import.meta.env.VITE_BASKET_COLLECTION + String(id);
   return (
     <div style={{margin: '0 auto'}}>
       <Header pageTitle={id as string} />
@@ -79,17 +73,3 @@ function BasketPage({ id }: BasketPageProps) {
 }
 
 export default BasketPage;
-
-/* RETURN DATA
-Array(3) [ {…}, {…}, {…} ]
-​
-0: Object { id: "1234567890", basket_id: "BASKET001", path: "BASKET001/Bearer/token1", … }
-​
-1: Object { id: "1234567891", basket_id: "BASKET001", path: "BASKET001/Bearer/token2", … }
-​
-2: Object { id: "1234567895", basket_id: "BASKET001", path: "BASKET001/Bearer/token6", … }
-​
-length: 3
-​
-<prototype>: Array []
-*/

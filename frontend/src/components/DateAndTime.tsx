@@ -15,8 +15,6 @@ function DateAndTime({method, time}: {method: string, time: string}) {
     
     let newTime = time.match(/\d{2}:\d{2}/) as RegExpMatchArray | null | string;
     let isPm = false;
-    // console.log('The date is:', date);
-    console.log('The time is:', newTime);
     if (newTime) {
       let temp: Array<string | number> = newTime[0].split(':').map(Number);
       if (typeof temp[0] === 'number' && temp[0] > 12) {
