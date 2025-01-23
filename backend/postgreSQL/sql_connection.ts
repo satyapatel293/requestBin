@@ -5,6 +5,7 @@ const pool = new Pool ({
     port: 5432,
     user: 'basketagent',
     database: 'requestbasketdb',
+    password: 'whatever',
     idleTimeoutMillis: 30000, 
     connectionTimeoutMillis: 2000
 });
