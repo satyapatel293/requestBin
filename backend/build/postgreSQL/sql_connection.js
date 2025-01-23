@@ -8,15 +8,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.connectDB = exports.pool = void 0;
+const dotenv_1 = __importDefault(require("dotenv"));
 const pg_1 = require("pg");
+dotenv_1.default.config();
 const pool = new pg_1.Pool({
     host: 'localhost',
     port: 5432,
-    user: 'basketagent',
-    database: 'requestbasketdb',
-    password: 'whatever',
+    user: process.env.DB_USER,
+    database: process.env.DB_DATABASE,
+    password: process.env.DB_PASSWORD,
     idleTimeoutMillis: 30000,
     connectionTimeoutMillis: 2000
 });

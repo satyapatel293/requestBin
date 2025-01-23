@@ -17,7 +17,7 @@ const cors_1 = __importDefault(require("cors"));
 const sql_connection_1 = require("../postgreSQL/sql_connection");
 const queries_1 = __importDefault(require("../postgreSQL/queries"));
 const mongoService_1 = __importDefault(require("../mongoDB/mongoService"));
-const PORT = 3001;
+const PORT = 3000;
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
