@@ -57,7 +57,7 @@ function BasketPage({ id }: BasketPageProps) {
     <div style={{margin: '0 auto'}}>
       <Header pageTitle={id as string} />
       <p>
-        Requests are collected at: whateverThisIs.com/basket/{id}
+        Requests are collected at: https://satyapatel.xyz/basket/{id}
         <button
             style={buttonStyle}
             onClick={() => navigator.clipboard.writeText(copyPath)}
