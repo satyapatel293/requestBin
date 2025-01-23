@@ -17,6 +17,7 @@
     "@eslint/js": "^9.18.0",
     "@stylistic/eslint-plugin": "^2.13.0",
     "@types/cors": "^2.8.17",
+    "@types/dotenv": "^6.1.1",
     "@types/eslint__js": "^8.42.3",
     "@types/express": "^5.0.0",
     "@types/pg": "^8.11.10",
@@ -28,6 +29,7 @@
   "dependencies": {
     "@types/mongoose": "^5.11.96",
     "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "mongoose": "^8.9.5",
     "pg": "^8.13.1",
