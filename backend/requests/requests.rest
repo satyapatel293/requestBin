@@ -7,17 +7,8 @@ GET http://localhost:3000/api/baskets/BASKET001
 
 ###
 
-DELETE http://localhost:3000/api/baskets/BASKET001
-
+DELETE http://localhost:3000/api/baskets/fe3f5b11-4
 ###
-
-###delete request basket
-DELETE  http://localhost:3000/api/baskets/BASKET001/requests
-
-
-
-###
-
 
 POST http://localhost:3000/api/baskets
 
@@ -26,7 +17,7 @@ POST https://www.satyapatel.xyz/api/baskets
 
 
 ### add item to request basket
-POST http://localhost:3000/basket/BASKET001?hey=lol&jk=yo+yo
+POST http://localhost:3000/basket/BASKET002?hey=lol&jk=yo+yo
 Content-Type: application/json
 
 {
@@ -37,14 +28,19 @@ Content-Type: application/json
   }
 }
 
+### add item to request basket
+DELETE  http://localhost:3000/basket/fe3f5b11-4
+
+
 ###
-POST http://localhost:3000/basket/BASKET001
+POST http://localhost:3000/basket/fe3f5b11-4
 Content-Type: application/json
 
 {
   "SpyID": "Bond James"
 }
 
+
 ###
 
-GET http://localhost:3000/basket/BASKET001
+DELETE  http://localhost:3000/api/baskets/fe3f5b11-4/requests
