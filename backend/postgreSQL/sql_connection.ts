@@ -1,11 +1,14 @@
+import dotenv from 'dotenv';
 import { Pool } from 'pg';
+
+dotenv.config();
 
 const pool = new Pool ({
     host: 'localhost',
     port: 5432,
-    user: 'basketagent',
-    database: 'requestbasketdb',
-    password: 'whatever',
+    user: process.env.DB_USER,
+    database: process.env.DB_DATABASE,
+    password: process.env.DB_PASSWORD,
     idleTimeoutMillis: 30000, 
     connectionTimeoutMillis: 2000
 });

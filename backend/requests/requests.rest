@@ -21,6 +21,10 @@ DELETE  http://localhost:3000/api/baskets/BASKET001/requests
 
 POST http://localhost:3000/api/baskets
 
+###
+POST https://www.satyapatel.xyz/api/baskets
+
+
 ### add item to request basket
 POST http://localhost:3000/basket/BASKET001?hey=lol&jk=yo+yo
 Content-Type: application/json

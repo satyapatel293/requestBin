@@ -1,10 +1,14 @@
+import dotenv from 'dotenv';
 import mongoose from "mongoose";
+
+dotenv.config();
+
 mongoose.set("strictQuery", false);
 
-console.log("connecting to", "mongodb://localhost:27017/request_basket");
+console.log("connecting to", process.env.MONGO_URL);
 
 mongoose
-  .connect("mongodb://localhost:27017/request_basket")
+  .connect(process.env.MONGO_URL as string)
   .then((_result) => {
     console.log("connected to MongoDB");
   })

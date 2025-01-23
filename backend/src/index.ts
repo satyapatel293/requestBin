@@ -5,7 +5,7 @@ import { connectDB } from "../postgreSQL/sql_connection";
 import sqlService from "../postgreSQL/queries";
 import mongoService from "../mongoDB/mongoService";
 
-const PORT = 3001;
+const PORT = 3000;
 const app = express();
 
 app.use(cors());
