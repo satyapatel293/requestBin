@@ -10,7 +10,7 @@ function App() {
     <>
       <Routes>
         {/* do we need a path for "/" to redirect to home page "/web/" */}
-        <Route path="/" element={<Navigate to="/web/" />} replace />
+        <Route path="/" element={<Navigate to="/web/" replace/>} />
         <Route path="/web/" element={<Home />} />
         <Route path='/web/:id' element={<BasketPage id={id} />} />
       </Routes>

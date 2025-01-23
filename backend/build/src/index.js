@@ -116,7 +116,7 @@ app.all("/basket/:basket_name", (req, res) => __awaiter(void 0, void 0, void 0, 
                 query_params: JSON.stringify(req.query),
             });
             console.log("posted request to db");
-            res.status(200);
+            res.status(200).send('Request logs');
         }
         else {
             console.log("BAD request to get url");
