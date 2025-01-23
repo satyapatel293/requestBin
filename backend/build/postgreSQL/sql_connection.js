@@ -9,18 +9,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.connectDB = exports.client = void 0;
+exports.connectDB = exports.pool = void 0;
 const pg_1 = require("pg");
-const client = new pg_1.Client({
+const pool = new pg_1.Pool({
     host: 'localhost',
     port: 5432,
     user: 'basketagent',
-    database: 'requestbasketdb'
+    database: 'requestbasketdb',
+    password: 'whatever',
+    idleTimeoutMillis: 30000,
+    connectionTimeoutMillis: 2000
 });
-exports.client = client;
+exports.pool = pool;
 const connectDB = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        yield client.connect();
+        yield pool.query('SELECT 1');
         console.log('Connected to PostgreSQL');
     }
     catch (err) {
